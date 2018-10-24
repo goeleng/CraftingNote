@@ -1,0 +1,29 @@
+<GuiXml>
+    <Controls>
+        <TopLevelControl name="CraftingNoteWindow" mouseEnabled="true" clampedToScreen="true" hidden="true" movable="true">
+            <Dimensions x="350" y="150"/>        
+            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="GuiRoot" offsetY="50" />
+            
+        </TopLevelControl>
+
+        <Control name="CN_QuestPanel" virtual="true" hidden="false">
+        <Anchor relativeTo="CraftingNoteWindow" point="TOPLEFT" offsetX="0" offsetY="0"/>
+            <Controls>
+                <Label name="$(parent)_Label" font="ZoFontHeader2" styleColor="000000" text="Quest name" >
+                    <Anchor point="LEFT" relativePoint="LEFT" offsetX="0" offsetY="0" />
+                </Label>
+            </Controls>
+        </Control>
+
+        <Control name="CN_ConditionPanel" virtual="true" hidden="false">
+            <Dimensions x="350"/>
+            <Anchor relativeTo="CN_QuestPanel" point="TOPLEFT" offsetX="10" offsetY="20"/>
+            <Controls>
+                <Label name="$(parent)_Label" wrapMode="TEXT_WRAP_MODE_TRUNCATE" font="ZoFontWinT2" styleColor="000000" text="Quest name" >
+                    <Dimensions x="330"/>
+                    <Anchor relativeTo="$(parent)" point="TOPLEFT" offsetX="0" offsetY="10"/>
+                </Label>
+            </Controls>
+        </Control>
+    </Controls>
+</GuiXml>

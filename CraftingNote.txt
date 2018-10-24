@@ -1,0 +1,7 @@
+## Title: Crafting Note
+## Author: Goeleng
+## Version: 0.0.2
+## APIVersion: 100025
+
+CraftingNote.lua
+CraftingNote.xml
