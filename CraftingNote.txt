@@ -1,6 +1,6 @@
 ## Title: Crafting Note
 ## Author: Goeleng
-## Version: 0.0.2
+## Version: 0.0.3
 ## APIVersion: 100025
 
 CraftingNote.lua
