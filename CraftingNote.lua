@@ -1,7 +1,7 @@
 ------------------------------
 -- CraftingNote
 -- Created by: Goeleng
--- Version: 0.0.2
+-- Version: 0.0.3
 ------------------------------
 
 CraftingNote = {}
@@ -80,6 +80,7 @@ function CraftingNote.CreateQuestObject(journalIndex)
             stepText = stepText, numberOfConditions = numberOfConditions, condition = condition}
 end
 
+-- Not used right now
 function CraftingNote.IsStepFinished(questIndex)
     for i = 1, table.getn(CraftingNote.quests[questIndex].condition) do
         local conditionText,currentConditionIndex,maxConditionIndex,_,isComplete,_,_,_ = GetJournalQuestConditionInfo(CraftingNote.quests[questIndex].journalIndex, 2, i)
@@ -107,7 +108,6 @@ function CraftingNote.ConditionChanged(eventCode, journalIndex, questName, condi
             conditionMax, isFailCondition, stepOverrideText, isPushed, isComplete, isConditionComplete, isStepHidden, isConditionCompleteStatusChanged)
     
     local questIndex = CraftingNote.GetQuestIndex(journalIndex)
-    local isStepFinished = CraftingNote.IsStepFinished(questIndex)
     
     CraftingNote.UpdateConditionText(questIndex, true)
     CraftingNote.UpdateQuestEntry(journalIndex, questIndex)
@@ -197,17 +197,24 @@ function CraftingNote.CreateConditionText(conditionText, questLabelControl, inde
     if conditionPanelControl == nil then
         conditionPanelControl = CreateControlFromVirtual("CN_ConditionPanel_", CraftingNoteWindow, "CN_ConditionPanel", index)
     end
-  
-    local delta = 0
+   
     conditionPanelControl:ClearAnchors()
-    preControl = GetControl("CN_ConditionPanel_" .. (index - 1) .. "_Label")
-    if preControl ~= nil then
-        _,_,_,_,_,delta = preControl:GetAnchor()
-        delta = delta + preControl:GetHeight()
-    end
-    conditionPanelControl:SetAnchor(TOPLEFT, questLabelControl, BOTTOMLEFT, 10, delta)
+    local height = CraftingNote.CalculateHeight(index)
+    conditionPanelControl:SetAnchor(TOPLEFT, questLabelControl, BOTTOMLEFT, 10, height)
     local conditionLabelControl = GetControl("CN_ConditionPanel_" .. index .. "_Label")
     conditionLabelControl:SetText(conditionText)
+end
+
+function CraftingNote.CalculateHeight(index) 
+    local height = 0
+    for index = 1, index - 1 do
+        preControl = GetControl("CN_ConditionPanel_" .. index .. "_Label")
+        if preControl ~= nil then
+            _,_,_,_,_,delta = preControl:GetAnchor()
+            height = height + delta + preControl:GetHeight()
+        end
+    end
+    return height
 end
 
 function CraftingNote.ResetConditionText()
