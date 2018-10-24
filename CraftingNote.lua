@@ -107,7 +107,6 @@ function CraftingNote.ConditionChanged(eventCode, journalIndex, questName, condi
             conditionMax, isFailCondition, stepOverrideText, isPushed, isComplete, isConditionComplete, isStepHidden, isConditionCompleteStatusChanged)
     
     local questIndex = CraftingNote.GetQuestIndex(journalIndex)
-    d(questIndex) -- correct?
     local isStepFinished = CraftingNote.IsStepFinished(questIndex)
     
     CraftingNote.UpdateConditionText(questIndex, true)
