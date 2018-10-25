@@ -106,13 +106,20 @@ end
 
 function CraftingNote.ConditionChanged(eventCode, journalIndex, questName, conditionText, conditionType, currConditionVal, newConditionVal, 
             conditionMax, isFailCondition, stepOverrideText, isPushed, isComplete, isConditionComplete, isStepHidden, isConditionCompleteStatusChanged)
-    
-    local questIndex = CraftingNote.GetQuestIndex(journalIndex)
-    
-    CraftingNote.UpdateConditionText(questIndex, true)
-    CraftingNote.UpdateQuestEntry(journalIndex, questIndex)
-    CraftingNote.UpdateConditionText(questIndex, false)
-  
+    if CraftingNote.IsCraftingQuest(journalIndex) then
+        local questIndex = CraftingNote.GetQuestIndex(journalIndex)
+        
+        CraftingNote.UpdateConditionText(questIndex, true)
+        CraftingNote.UpdateQuestEntry(journalIndex, questIndex)
+        CraftingNote.UpdateConditionText(questIndex, false)
+    end
+end
+
+function CraftingNote.IsCraftingQuest(journalIndex)
+    if GetJournalQuestType(i) == 4 then
+        return true
+    end
+    return false
 end
 
 function CraftingNote.UpdateQuestEntry(updateJournalIndex, questIndex) 
